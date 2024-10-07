@@ -17,12 +17,12 @@ const DashboardPage = ({ params }: { params: { name: string } }) => {
     }, []);
 
     return (
-        <div className=' p-4'>
-            <h1 className=' p-4 text-2xl'>Welcome {params.name}!</h1>
+        <div className=' p-4 m-4'>
+            <h1 className=' p-4 m-4 text-2xl flex justify-center items-center'>Welcome {params.name}!</h1>
             {isUserAuthenticated && userData ? (
                 <UserDashboard />
             ) : (
-                <div className="p-4">
+                <div className="p-4 m-4">
                     <p className="text-red-600">You need to login to access this page.</p>
                     <Link href="/login" className="text-blue-500 hover:underline">
                         Go to Login
