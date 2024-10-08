@@ -48,7 +48,7 @@ const RegisterCard: React.FC = () => {
         confirmButtonColor: "#1e40af", 
       }).then((result) => {
         if (result.isConfirmed) {
-          router.push("/logim");
+          router.push("/login");
         }
       });
       } catch (error) {

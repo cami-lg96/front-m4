@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 
 interface CarouselProps {
@@ -9,24 +10,36 @@ interface CarouselProps {
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const nextSlide = () => {
+    // Envolver nextSlide en useCallback para evitar su recreación en cada render
+    const nextSlide = useCallback(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    };
+    }, [images.length]);
 
-    const prevSlide = () => {
+    // Envolver prevSlide en useCallback
+    const prevSlide = useCallback(() => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
+    }, [images.length]);
+
+    // Auto-slide functionality
+    useEffect(() => {
+        const interval = setInterval(() => {
+            nextSlide();
+        }, 3000); // Cambia cada 3 segundos
+
+        // Limpia el intervalo al desmontar el componente
+        return () => clearInterval(interval);
+    }, [nextSlide]); // Solo depende de nextSlide, que ahora es estable
 
     return (
         <div className="relative w-full bg-white">
             <div className="overflow-hidden rounded-lg shadow-lg">
                 <div className="relative">
-                    <Link href="/store">     
-                    <img 
-                        src={images[currentIndex]} 
-                        alt={`Slide ${currentIndex}`}
-                        className="w-full h-auto max-h-[70vh] object-contain" 
-                    />
+                    <Link href="/store">
+                        <img 
+                            src={images[currentIndex]} 
+                            alt={`Slide ${currentIndex}`}
+                            className="w-full h-auto max-h-[70vh] object-contain" 
+                        />
                     </Link>
                     <div className="absolute inset-0 bg-gradient-to-l from-white to-transparent w-1/4 left-0 pointer-events-none" />
                     <div className="absolute inset-0 bg-gradient-to-r from-white to-transparent w-1/4 right-0 pointer-events-none" />
@@ -61,3 +74,4 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
 };
 
 export default Carousel;
+

@@ -96,7 +96,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           <hr className="my-3" />
           <div className="mt-3">
             <p className="text-gray-700 text-sm">{description}</p>
-            <p className="text-gray-700 text-sm">Stock: {stock}</p>
+            <p className="text-gray-700 text-sm p-2">Stock: {stock}</p>
           </div>
           <div className="flex items-center mt-6">
             <button

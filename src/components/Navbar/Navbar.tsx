@@ -47,51 +47,51 @@ const Navbar = () => {
 
         <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
           <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-blue-950 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-blue-950 dark:bg-blue-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
+            <Link>
               <a href="/" className="block py-2 px-3 text-slate-300 rounded hover:bg-slate-950 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700" aria-current="page">
                 Home
               </a>
-            </li>
-            <li>
+            </Link>
+            <Link>
               <a href="/store" className="block py-2 px-3 text-slate-300 rounded hover:bg-slate-950 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
                 Store
               </a>
-            </li>
+            </Link>
             {!userData ? (
               <>
-                <li>
+                <Link>
                   <a href="/login" className="block py-2 px-3 text-slate-300 rounded hover:bg-slate-950 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
                     Login
                   </a>
-                </li>
-                <li>
+                </Link>
+                <Link>
                   <a href="/register" className="block py-2 px-3 text-slate-300 rounded hover:bg-slate-950 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
                     Register
                   </a>
-                </li>
+                </Link>
               </>
             ) : (
               <>
-                <li>
+                <Link>
                   <a href={`/user/${userData.name}`} className="block py-2 px-3 text-slate-300 rounded hover:bg-slate-950 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
                     Dashboard
                   </a>
-                </li>
-                <li>
+                </Link>
+                <Link>
                   <a href={`/user/${userData.name}/orders`} className="block py-2 px-3 text-slate-300 rounded hover:bg-slate-950 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
                     Orders
                   </a>
-                </li>
-                <li>
+                </Link>
+                <Link>
                   <a href="/cart" className="block py-2 px-3 text-slate-300 rounded hover:bg-slate-950 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
                     Cart
                   </a>
-                </li>
-                <li>
+                </Link>
+                <Link>
                   <button onClick={handleLogout} className="block py-2 px-3 text-slate-300 rounded hover:bg-slate-950 md:hover:bg-transparent md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-200 dark:hover:bg-slate-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-slate-700">
                     Logout
                   </button>
-                </li>
+                </Link>
               </>
             )}
           </ul>

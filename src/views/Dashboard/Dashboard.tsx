@@ -1,22 +1,47 @@
 "use client"; 
 
 import React, { useState, useEffect } from 'react';
-import { getUserData } from '../../helpers/auth';
+import { getUserData, isAuthenticated } from '@/helpers/auth';
 import { IUser } from '@/interface/userInterface'; 
+import { useRouter } from 'next/navigation';
 
 const UserDashboard: React.FC = () => {
 
   const [user, setUser] = useState<IUser | null>(null); 
+ const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
     useEffect(() => {
         const userData = getUserData();
-        if (userData) {
+        try {
+           if (userData) {
             setUser(userData); 
         } else {
             console.log("No user data available"); 
-        }
+        } 
+        } finally {
+            setLoading(false);
+          }  
+       
     }, []);
 
+    if (loading) {
+        return <p  className="flex flex-col items-center  h-screen p-4">Loading...</p>;
+     }
+   
+     if (!isAuthenticated()) {
+        return (
+         <div className="flex flex-col items-center  h-screen p-4">
+           <h1 className="text-xl font-bold p-4" >You need to login to view your dashboard.</h1>
+           <button
+           className="transition-colors text-sm bg-white border border-slate-600  rounded  text-slate-900 text-hover shadow-md p-2"
+             onClick={() => router.push("/login")}
+           >
+             Login
+           </button>
+         </div>
+       );
+     }
 
     return (
         <div className=" flex justify-center items-center p-2 m-2">
