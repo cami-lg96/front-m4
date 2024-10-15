@@ -24,11 +24,9 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             nextSlide();
-        }, 3000); // Cambia cada 3 segundos
-
-        // Limpia el intervalo al desmontar el componente
+        }, 3000); 
         return () => clearInterval(interval);
-    }, [nextSlide]); // Solo depende de nextSlide, que ahora es estable
+    }, [nextSlide]); 
 
     return (
         <div className="relative w-full bg-white">

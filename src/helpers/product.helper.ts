@@ -47,4 +47,17 @@ export const getProductsByCategory = async (categoryName: string): Promise<IProd
       throw new Error(error instanceof Error ? error.message : 'Error fetching products by category');
     }
   };
+
+  export const getProductsByCategoryId = async (categoryId: number): Promise<IProduct[]> => {
+    console.log('Category name from params:', categoryId); 
+    console.log('Available categories:', categoriesToPreLoad); 
+    
+    try {
+      const products = await getProductsDB();
+      const productsByCategoryId = products.filter(product => product.categoryId === categoryId);
+      return productsByCategoryId;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : 'Error fetching products by category');
+    }
+  };
   

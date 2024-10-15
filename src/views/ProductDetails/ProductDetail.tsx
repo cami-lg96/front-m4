@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { IProduct } from "@/interface/productInterface";
 import { isAuthenticated } from "@/helpers/auth";
 import { CartItem } from "@/interface/orderInterface";
+import SimilarProducts from "@/components/SimilarProducts/SimilarProducts.tsx/SimilarProducts";
 
 interface ProductDetailProps extends IProduct {
   productId: string; 
@@ -17,6 +18,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   stock,
   price,
   productId,
+  categoryId,
 }) => {
   const router = useRouter();
 
@@ -108,6 +110,9 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
           </div>
         </div>
       </div>
+       <div className="m-4">
+       <SimilarProducts categoryId={categoryId} currentProductId={Number(productId)} />
+       </div>
     </div>
   );
 };

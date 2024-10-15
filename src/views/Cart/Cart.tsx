@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { isAuthenticated } from "@/helpers/auth";
 import { CartItem } from '@/interface/orderInterface';
 import { createOrder } from '@/helpers/orders.helper';
+import Swal from 'sweetalert2';
 
 const UserCart: React.FC = () => {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -59,10 +60,20 @@ const UserCart: React.FC = () => {
 
         try {
             await createOrder(token, purchaseData);
-            alert("Purchase successful!");
-            setCartItems([]);
+            //alert("Purchase successful!");
+            setCartItems([]); 
             localStorage.removeItem("cart");
-            router.push(`/user/${userData.name}/orders`);
+            Swal.fire({
+                title: "Purchase successful!",
+                confirmButtonText: "Go to orders",
+                confirmButtonColor: "#1e40af",
+                allowOutsideClick: false, 
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  router.push(`/user/${userData.name}/orders`);
+                }
+              });
+           
         } catch (error) {
             console.error("Error during purchase:", error);
             alert("Purchase failed. Please try again.");
